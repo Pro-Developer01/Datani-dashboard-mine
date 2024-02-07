@@ -1,35 +1,84 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
+/* global module */
+/* global require */
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+  darkMode: "class",
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    extend: {
+    container: {
+      center: true,
+      padding: "2rem",
       screens: {
-        xs: '450px',
+        "2xl": "1400px",
       },
+    },
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+    },
+    extend: {
       colors: {
-        'chatbot-background': '#F9FAFB',
-        'spark-violet-light': '#8A98D6',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        lightGrey:'#5F5E5E',
+        inputBorder:'#9F9F9F',
+        buttonGrey:"#7F7F81",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
-      fontFamily: {
-        montserrat: ['Montserrat', ...defaultTheme.fontFamily.sans],
-        openSans: ['OpenSans', ...defaultTheme.fontFamily.sans],
-        modernEra: ['ModernEra', ...defaultTheme.fontFamily.sans],
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
-      fontSize: {
-        xssm: ['0.813rem', '1.125rem'], // ['13px', '18px'],
-        smbase: ['0.938rem', '1.25rem'], // ['15px', '20px'],
-        baselg: ['1.05625rem', '1.375rem'], // ['17px', '22px'],
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
       },
-      gridTemplateColumns: {
-        16: 'repeat(16, minmax(0, 1fr))',
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [],
-}
-
+  plugins: [require("tailwindcss-animate")],
+};
